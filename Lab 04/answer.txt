@@ -1,0 +1,7 @@
+2.
+	-After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two
+objects still remain? this swap method only swap the copy of the objects, so the objects 
+are unchanged.If you want to swap two objects, we must use a wrapper class to wrap them.
+	-After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the 
+title of the JungleDVD changed?Because this method impact direcly the original object.
+setter method set(title) is used to update the title of the original object.
