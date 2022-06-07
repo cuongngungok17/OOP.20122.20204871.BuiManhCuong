@@ -1,0 +1,3 @@
+- Which classes are aggregates of other classes? Checking all constructors of whole classes if they
+initialize for their parts? Class Store and Cart are aggregates of media class, 
+Class CD is aggregate of Track class.
