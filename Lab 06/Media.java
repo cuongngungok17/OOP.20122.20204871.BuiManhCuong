@@ -1,8 +1,9 @@
 package hust.soict.dsai.aims.media;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
-public abstract class Media {
+public abstract class Media implements Comparable<Media> {
 	
 	protected final int id;
 	protected String title;
@@ -77,4 +78,48 @@ public abstract class Media {
 			return false;
 		}
 	}
+	
+	public int compareTo(Media obj) {
+		if (this.title.equals(obj.getTitle())) {
+			return this.getCategory().compareTo(obj.getCategory());
+		}
+		return this.getTitle().compareTo(obj.getTitle());
+	}
+	
+	public static class MediaComparatorByTitleCost implements Comparator<Media>{
+		public int compare(Media o1, Media o2) {
+			if (o1.getTitle().equals(o2.getTitle())) {
+				if (o1.getCost()>o2.getCost()) {
+					return -1;
+				}
+				if (o1.getCost()<o2.getCost()) {
+					return 1;
+				}
+				if (o1.getCost()==o2.getCost()) {
+					return 0;
+				}
+			}
+			return o1.getTitle().compareTo(o2.getTitle());
+		}
+	}
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST =
+			new MediaComparatorByTitleCost();
+	
+	public static class MediaComparatorByCostTitle implements Comparator<Media>{
+		public int compare(Media o1, Media o2) {
+			int com = 0;
+			if (o1.getCost()==o2.getCost()) {
+				com = o1.getTitle().compareTo(o2.getTitle());
+			}
+			if (o1.getCost()>o2.getCost()) {
+				com = -1;
+			}
+			if (o1.getCost()<o2.getCost()) {
+				com = 1;
+			}
+			return com;
+		}
+	}
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE =
+			new MediaComparatorByCostTitle();
 }
